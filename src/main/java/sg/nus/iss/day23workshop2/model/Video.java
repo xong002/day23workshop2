@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Video {
-    private int id;
+    private Integer id;
     private String title;
     private String synopsis;
-    private int availableCount;
+    private Integer availableCount;
 
 }
