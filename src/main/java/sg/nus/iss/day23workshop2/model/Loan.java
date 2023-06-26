@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Loan {
     public int id;
-    public int customer_id;
+    public int customerId;
 
     @FutureOrPresent(message = "Must be present or future date")
     public Date loanDate;

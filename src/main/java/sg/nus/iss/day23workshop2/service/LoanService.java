@@ -1,5 +1,7 @@
 package sg.nus.iss.day23workshop2.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sg.nus.iss.day23workshop2.model.Customer;
+import sg.nus.iss.day23workshop2.model.Loan;
+import sg.nus.iss.day23workshop2.model.LoanDetails;
 import sg.nus.iss.day23workshop2.model.Video;
 import sg.nus.iss.day23workshop2.repository.CustomerRepository;
 import sg.nus.iss.day23workshop2.repository.LoanDetailsRepository;
@@ -53,6 +57,22 @@ public class LoanService {
         if(bAvailable){
         //create loan record
         //create loan details
+            Loan loan = new Loan();
+            loan.setCustomerId(customer.getId());
+            loan.setLoanDate(Date.valueOf(LocalDate.now()));
+
+            Integer createdLoanId = loanRepo.insertLoan(loan); // can also use createLoan method
+
+            for (Video video : videos){
+                LoanDetails loanDetails = new LoanDetails();
+                loanDetails.setLoanId(createdLoanId);
+                loanDetails.setVideoId(video.getId());
+                loanDetailsRepository.insertLoan(loanDetails);
+            }
+
+            bLoanSuccessful = true;
+
+
         }
 
         return bLoanSuccessful;
